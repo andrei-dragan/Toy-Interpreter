@@ -1,4 +1,4 @@
-package Domain;
+package Domain.Statements;
 
 public interface IStmt {
     // execution method for a statement.

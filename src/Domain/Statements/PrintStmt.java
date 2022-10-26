@@ -1,6 +1,4 @@
-package Domain;
-
-import Domain.IStmt;
+package Domain.Statements;
 
 public class PrintStmt implements IStmt {
     Exp exp;

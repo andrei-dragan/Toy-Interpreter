@@ -1,4 +1,4 @@
-package Domain;
+package Domain.Statements;
 
 import Domain.Types.Type;
 import Domain.Values.Value;
