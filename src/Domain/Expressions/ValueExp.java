@@ -20,4 +20,9 @@ public class ValueExp implements Exp {
     public Value eval(MyIDictionary<String, Value> tbl) throws CustomException {
         return e;
     }
+
+    @Override
+    public Exp deepCopy() {
+        return new ValueExp(e.deepCopy());
+    }
 }

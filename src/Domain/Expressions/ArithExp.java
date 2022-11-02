@@ -46,4 +46,9 @@ public class ArithExp implements Exp {
             return new IntValue(n1 / n2);
         }
     }
+
+    @Override
+    public Exp deepCopy() {
+        return new ArithExp(op, e1.deepCopy(), e2.deepCopy());
+    }
 }

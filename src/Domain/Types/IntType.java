@@ -18,4 +18,7 @@ public class IntType implements Type {
     public String toString() {
         return "int";
     }
+
+    @Override
+    public Type deepCopy() {return new IntType();}
 }

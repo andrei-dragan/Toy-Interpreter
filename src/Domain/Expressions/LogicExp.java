@@ -41,4 +41,9 @@ public class LogicExp implements Exp {
         if (Objects.equals(op, "and")) return new BoolValue(n1 && n2);
         else return new BoolValue(n1 || n2);
     }
+
+    @Override
+    public Exp deepCopy() {
+        return new LogicExp(op, e1.deepCopy(), e2.deepCopy());
+    }
 }

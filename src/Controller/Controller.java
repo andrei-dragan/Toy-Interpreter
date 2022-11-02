@@ -23,6 +23,7 @@ public class Controller {
 
     public void allStep() throws CustomException {
         PrgState prgState = repo.getCrtPrg();
+        System.out.println(prgState.toString());
         while(!prgState.getStk().isEmpty()) {
             oneStep(prgState);
             System.out.println(prgState.toString());

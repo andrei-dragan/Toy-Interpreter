@@ -42,7 +42,7 @@ public class MyDictionary<T1, T2> implements MyIDictionary<T1, T2> {
     @Override
     public String toString() {
         StringBuilder answer = new StringBuilder();
-        answer.append("The symbol table is:\n");
+        answer.append("SymTable:\n");
 
         boolean append = false;
         answer.append('{');

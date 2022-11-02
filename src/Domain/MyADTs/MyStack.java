@@ -35,7 +35,7 @@ public class MyStack<T> implements MyIStack<T> {
     @Override
     public String toString() {
         StringBuilder answer = new StringBuilder();
-        answer.append("The execution stack is:\n");
+        answer.append("ExeStack:\n");
 
         Stack<T> tempStack = new Stack<T>();
         while (!stack.isEmpty()) {

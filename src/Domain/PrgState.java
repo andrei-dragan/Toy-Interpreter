@@ -19,12 +19,13 @@ public class PrgState {
         exeStack = stk;
         symTable = symtbl;
         out = ot;
+        originalProgram = prg.deepCopy();
         exeStack.push(prg);
     }
 
     @Override
     public String toString() {
-        return exeStack.toString() + symTable.toString() + out.toString() +  "\n\n";
+        return exeStack.toString() + symTable.toString() + out.toString();
     }
 
     public MyIStack<IStmt> getStk() {return exeStack;}

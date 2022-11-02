@@ -43,4 +43,9 @@ public class AssignStmt implements IStmt {
         }
         return state;
     }
+
+    @Override
+    public IStmt deepCopy() {
+        return new AssignStmt(id, exp.deepCopy());
+    }
 }

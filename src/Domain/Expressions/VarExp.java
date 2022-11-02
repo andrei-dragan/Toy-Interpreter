@@ -23,4 +23,8 @@ public class VarExp implements Exp {
         return tbl.lookup(id);
     }
 
+    @Override
+    public Exp deepCopy() {
+        return new VarExp(id);
+    }
 }

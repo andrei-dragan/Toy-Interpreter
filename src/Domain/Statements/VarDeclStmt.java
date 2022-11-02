@@ -28,4 +28,9 @@ public class VarDeclStmt implements IStmt {
         symTbl.add(name, typ.getDefault());
         return state;
     }
+
+    @Override
+    public IStmt deepCopy() {
+        return new VarDeclStmt(name, typ.deepCopy());
+    }
 }

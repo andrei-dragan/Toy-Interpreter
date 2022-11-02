@@ -13,4 +13,9 @@ public class NopStmt implements IStmt {
     public PrgState execute(PrgState state) throws CustomException {
         return state;
     }
+
+    @Override
+    public IStmt deepCopy() {
+        return new NopStmt();
+    }
 }

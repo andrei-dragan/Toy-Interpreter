@@ -6,4 +6,5 @@ import Domain.Values.Value;
 
 public interface Exp {
     public Value eval(MyIDictionary<String, Value> tbl) throws CustomException;
+    public Exp deepCopy();
 }

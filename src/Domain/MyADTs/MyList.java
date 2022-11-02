@@ -48,7 +48,7 @@ public class MyList<T> implements MyIList<T> {
     @Override
     public String toString() {
         StringBuilder answer = new StringBuilder();
-        answer.append("The output list is:\n");
+        answer.append("Out:\n");
 
         for (T t : list) {
             answer.append(t.toString());

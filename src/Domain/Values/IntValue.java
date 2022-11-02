@@ -16,4 +16,7 @@ public class IntValue implements Value {
 
     @Override
     public Type getType() {return new IntType();}
+
+    @Override
+    public Value deepCopy() {return new IntValue(val);}
 }
