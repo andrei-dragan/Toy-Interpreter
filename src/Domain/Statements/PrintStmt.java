@@ -1,9 +1,16 @@
 package Domain.Statements;
 
+import Domain.Exceptions.CustomException;
+import Domain.Expressions.Exp;
+import Domain.MyADTs.MyIDictionary;
+import Domain.MyADTs.MyIList;
+import Domain.PrgState;
+import Domain.Values.Value;
+
 public class PrintStmt implements IStmt {
     Exp exp;
 
-    PrintStmt(Exp exp) {
+    public PrintStmt(Exp exp) {
         this.exp = exp;
     }
 
@@ -13,11 +20,12 @@ public class PrintStmt implements IStmt {
     }
 
     @Override
-    public PrgState execute(PrgState state) throws MyException {
-        MyIStack<IStmt> stk = state.getStk();
+    public PrgState execute(PrgState state) throws CustomException {
+        MyIList<Value> out = state.getOut();
+        MyIDictionary<String, Value> symTbl = state.getSymTable();
 
-        stk.pop();
-        // also you need to add it to the output
+        Value v = exp.eval(symTbl);
+        out.pushBack(v);
 
         return state;
     }

@@ -11,7 +11,7 @@ public class BoolValue implements Value {
     @Override
     public String toString() {
         // not sure if that is what is expected to be printed
-        return "bool " + getVal();
+        return Boolean.toString(val);
     }
 
     @Override

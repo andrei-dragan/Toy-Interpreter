@@ -1,5 +1,13 @@
 package Domain.Statements;
 
+import Domain.Exceptions.CustomException;
+import Domain.Exceptions.TypeException;
+import Domain.Expressions.Exp;
+import Domain.MyADTs.MyIDictionary;
+import Domain.MyADTs.MyIStack;
+import Domain.PrgState;
+import Domain.Types.BoolType;
+import Domain.Values.BoolValue;
 import Domain.Values.Value;
 
 public class IfStmt implements IStmt {
@@ -7,30 +15,29 @@ public class IfStmt implements IStmt {
     IStmt thenS;
     IStmt elseS;
 
-    IfStmt(Exp exp, IStmt thenS, IStmt elseS) {
-        this.exp = exp;
-        this.thenS = thenS;
-        this.elseS = elseS;
+    public IfStmt(Exp ifExp, IStmt ifThenS, IStmt ifElseS) {
+        exp = ifExp;
+        thenS = ifThenS;
+        elseS = ifElseS;
     }
 
     @Override
     public String toString() {
-        return "(IF (" + exp.toString() + ") THEN (" + thenS.toString() + ") ELSE (" + elseS.toString() + "))";
+        return "(if (" + exp.toString() + ") then (" + thenS.toString() + ") else (" + elseS.toString() + "))";
     }
 
     @Override
-    public PrgState execute(PrgState state) throws MyException {
-        MyIStack<IStmt> stk = state.getSk();
+    public PrgState execute(PrgState state) throws CustomException {
+        MyIStack<IStmt> stk = state.getStk();
         MyIDictionary<String, Value> symTbl = state.getSymTable();
 
-        stk.pop();
-
         Value cond = exp.eval(symTbl);
-        if (cond.getType() != bool) {
-            throw new MyException("conditional expr is not a boolean");
+        if (!cond.getType().equals(new BoolType())) {
+            throw new TypeException("conditional expr is not a boolean");
         }
         else {
-            if (cond == True) stk.push(thenS);
+            BoolValue v = (BoolValue) cond;
+            if (v.getVal()) stk.push(thenS);
             else stk.push(elseS);
         }
 

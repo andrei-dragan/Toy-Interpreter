@@ -1,5 +1,7 @@
 package Domain.Expressions;
 
+import Domain.Exceptions.CustomException;
+import Domain.MyADTs.MyIDictionary;
 import Domain.Values.Value;
 
 public class ValueExp implements Exp {
@@ -10,7 +12,12 @@ public class ValueExp implements Exp {
     }
 
     @Override
-    public Value eval(MyIDictionary<String, Value> tbl) throws MyException {
+    public String toString() {
+        return e.toString();
+    }
+
+    @Override
+    public Value eval(MyIDictionary<String, Value> tbl) throws CustomException {
         return e;
     }
 }

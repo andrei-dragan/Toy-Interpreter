@@ -1,3 +1,7 @@
 package Domain.Types;
 
-public interface Type {}
+import Domain.Values.Value;
+
+public interface Type {
+    public Value getDefault();
+}

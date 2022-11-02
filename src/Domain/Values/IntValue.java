@@ -11,7 +11,7 @@ public class IntValue implements Value {
     @Override
     public String toString() {
         // not sure if that is what is expected to be printed
-        return "int " + getVal();
+        return Integer.toString(val);
     }
 
     @Override

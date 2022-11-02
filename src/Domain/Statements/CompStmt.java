@@ -1,21 +1,25 @@
 package Domain.Statements;
 
+import Domain.Exceptions.CustomException;
+import Domain.MyADTs.MyIStack;
+import Domain.PrgState;
+
 public class CompStmt implements IStmt {
     IStmt first;
     IStmt snd;
 
-    CompStmt(IStmt firstStmt, IStmt secondStmt) {
-        this.first = firstStmt;
-        this.snd = secondStmt;
+    public CompStmt(IStmt firstStmt, IStmt secondStmt) {
+        first = firstStmt;
+        snd = secondStmt;
     }
 
     @Override
     public String toString() {
-        return "(" + first.toString() + ";" + snd.toString() + ")";
+        return "(" + first.toString() + "; " + snd.toString() + ")";
     }
 
     @Override
-    public PrgState execute(PrgState state) throws MyException {
+    public PrgState execute(PrgState state) throws CustomException {
         MyIStack<IStmt> stk = state.getStk();
         stk.push(snd);
         stk.push(first);
