@@ -6,4 +6,4 @@ Using the model-view-controller architectural pattern and the object-oriented co
 - logging information about each execution step inside external files
 - having besides a local stack, a global heap with a garbage collector
 - handling multi-threading
-- type-checking [update in the near future yet to come]
+- type-checking [update in the near future]
