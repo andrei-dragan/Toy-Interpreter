@@ -1,6 +1,6 @@
 package Domain.Statements;
 
-import Domain.Exceptions.CustomException;
+import Exceptions.CustomException;
 import Domain.PrgState;
 
 public class NopStmt implements IStmt {
@@ -11,7 +11,7 @@ public class NopStmt implements IStmt {
 
     @Override
     public PrgState execute(PrgState state) throws CustomException {
-        return state;
+        return null;
     }
 
     @Override

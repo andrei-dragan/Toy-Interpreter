@@ -1,12 +1,13 @@
 package Domain.MyADTs;
 
-import Domain.Exceptions.ListElementException;
-import Domain.Exceptions.ListIsEmptyException;
+import Exceptions.ListElementException;
+import Exceptions.ListIsEmptyException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyList<T> implements MyIList<T> {
-    ArrayList<T> list;
+    List<T> list;
 
     public MyList() {
         list = new ArrayList<T>();
@@ -18,7 +19,7 @@ public class MyList<T> implements MyIList<T> {
     }
 
     @Override
-    public Boolean isEmpty() {
+    public boolean isEmpty() {
         return (list.size() == 0);
     }
 

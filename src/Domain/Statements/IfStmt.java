@@ -1,7 +1,8 @@
 package Domain.Statements;
 
-import Domain.Exceptions.CustomException;
-import Domain.Exceptions.TypeException;
+import Domain.MyADTs.MyIHeap;
+import Exceptions.CustomException;
+import Exceptions.TypeException;
 import Domain.Expressions.Exp;
 import Domain.MyADTs.MyIDictionary;
 import Domain.MyADTs.MyIStack;
@@ -30,8 +31,9 @@ public class IfStmt implements IStmt {
     public PrgState execute(PrgState state) throws CustomException {
         MyIStack<IStmt> stk = state.getStk();
         MyIDictionary<String, Value> symTbl = state.getSymTable();
+        MyIHeap<Integer, Value> heap = state.getHeap();
 
-        Value cond = exp.eval(symTbl);
+        Value cond = exp.eval(symTbl, heap);
         if (!cond.getType().equals(new BoolType())) {
             throw new TypeException("conditional expr is not a boolean");
         }
@@ -41,7 +43,7 @@ public class IfStmt implements IStmt {
             else stk.push(elseS);
         }
 
-        return state;
+        return null;
     }
 
     @Override

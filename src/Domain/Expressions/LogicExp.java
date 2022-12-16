@@ -1,7 +1,8 @@
 package Domain.Expressions;
 
-import Domain.Exceptions.CustomException;
-import Domain.Exceptions.TypeException;
+import Domain.MyADTs.MyIHeap;
+import Exceptions.CustomException;
+import Exceptions.TypeException;
 import Domain.MyADTs.MyIDictionary;
 import Domain.Types.BoolType;
 import Domain.Values.BoolValue;
@@ -25,18 +26,18 @@ public class LogicExp implements Exp {
     }
 
     @Override
-    public Value eval(MyIDictionary<String, Value> tbl) throws CustomException {
-        Value v1 = e1.eval(tbl);
+    public Value eval(MyIDictionary<String, Value> tbl, MyIHeap<Integer, Value> hp) throws CustomException {
+        Value v1 = e1.eval(tbl, hp);
         if (!v1.getType().equals(new BoolType())) throw new TypeException("first operand is not a boolean.\n");
 
-        Value v2 = e2.eval(tbl);
+        Value v2 = e2.eval(tbl, hp);
         if (!v2.getType().equals(new BoolType()))  throw new TypeException("second operand is not a boolean.\n");
 
         BoolValue b1 = (BoolValue)v1;
         BoolValue b2 = (BoolValue)v2;
 
-        Boolean n1 = b1.getVal();
-        Boolean n2 = b2.getVal();
+        boolean n1 = b1.getVal();
+        boolean n2 = b2.getVal();
 
         if (Objects.equals(op, "and")) return new BoolValue(n1 && n2);
         else return new BoolValue(n1 || n2);

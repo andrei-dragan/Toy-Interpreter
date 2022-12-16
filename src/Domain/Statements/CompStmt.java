@@ -1,6 +1,6 @@
 package Domain.Statements;
 
-import Domain.Exceptions.CustomException;
+import Exceptions.CustomException;
 import Domain.MyADTs.MyIStack;
 import Domain.PrgState;
 
@@ -23,7 +23,7 @@ public class CompStmt implements IStmt {
         MyIStack<IStmt> stk = state.getStk();
         stk.push(snd);
         stk.push(first);
-        return state;
+        return null;
     }
 
     @Override

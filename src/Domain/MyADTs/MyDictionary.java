@@ -1,12 +1,14 @@
 package Domain.MyADTs;
 
-import Domain.Exceptions.KeyInDictException;
-import Domain.Exceptions.KeyNotInDictException;
+import Domain.Values.Value;
+import Exceptions.KeyInDictException;
+import Exceptions.KeyNotInDictException;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class MyDictionary<T1, T2> implements MyIDictionary<T1, T2> {
     HashMap<T1, T2> dictionary;
@@ -16,7 +18,7 @@ public class MyDictionary<T1, T2> implements MyIDictionary<T1, T2> {
     }
 
     @Override
-    public Boolean isDefined(T1 key) {
+    public boolean isDefined(T1 key) {
         return dictionary.containsKey(key);
     }
 
@@ -44,22 +46,23 @@ public class MyDictionary<T1, T2> implements MyIDictionary<T1, T2> {
         StringBuilder answer = new StringBuilder();
         answer.append("SymTable:\n");
 
-        boolean append = false;
-        answer.append('{');
         Set<Map.Entry<T1, T2>> entrySet = dictionary.entrySet();
         for (Map.Entry<T1, T2> t1T2Entry : entrySet) {
-            append = true;
-            answer.append("[").append(t1T2Entry.getKey()).append(", ").append(((Map.Entry<T1, T2>) t1T2Entry).getValue()).append("], ");
+            answer.append(t1T2Entry.getKey()).append("-->").append((t1T2Entry).getValue()).append('\n');
         }
-
-        if (append) {
-            answer.deleteCharAt(answer.length() - 1);
-            answer.deleteCharAt(answer.length() - 1);
-        }
-        answer.append("}\n");
 
         answer.append("=======================================\n");
         return answer.toString();
+    }
+
+    @Override
+    public Collection<T2> getContent() {
+        return dictionary.values();
+    }
+
+    @Override
+    public Set<Map.Entry<T1, T2>> getEntrySet() {
+        return dictionary.entrySet();
     }
 }
 

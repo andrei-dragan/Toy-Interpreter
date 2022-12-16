@@ -1,8 +1,9 @@
 package Domain.Statements;
 
-import Domain.Exceptions.AssignmentException;
-import Domain.Exceptions.CustomException;
-import Domain.Exceptions.KeyNotInDictException;
+import Domain.MyADTs.MyIHeap;
+import Exceptions.AssignmentException;
+import Exceptions.CustomException;
+import Exceptions.KeyNotInDictException;
 import Domain.Expressions.Exp;
 import Domain.MyADTs.MyIDictionary;
 import Domain.MyADTs.MyIStack;
@@ -27,11 +28,11 @@ public class AssignStmt implements IStmt {
 
     @Override
     public PrgState execute(PrgState state) throws CustomException {
-        MyIStack<IStmt> stk = state.getStk();
         MyIDictionary<String, Value> symTbl = state.getSymTable();
+        MyIHeap<Integer, Value> heap = state.getHeap();
 
         if (symTbl.isDefined(id)) {
-            Value val = exp.eval(symTbl);
+            Value val = exp.eval(symTbl, heap);
             Type typeId = symTbl.lookup(id).getType();
             if ((val.getType()).equals(typeId)) {
                 symTbl.update(id, val);
@@ -41,7 +42,7 @@ public class AssignStmt implements IStmt {
         else {
             throw new KeyNotInDictException("the used variable " + id + " was not declared before");
         }
-        return state;
+        return null;
     }
 
     @Override

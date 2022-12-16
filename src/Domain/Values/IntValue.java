@@ -7,10 +7,13 @@ public class IntValue implements Value {
     int val;
     public IntValue(int v) {val = v;}
 
+    @Override
+    public boolean equals(Object another) { return another instanceof IntValue; }
+
     public int getVal() {return val;}
+
     @Override
     public String toString() {
-        // not sure if that is what is expected to be printed
         return Integer.toString(val);
     }
 

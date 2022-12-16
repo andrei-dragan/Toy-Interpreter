@@ -1,7 +1,8 @@
 package View;
 
 import Controller.Controller;
-import Domain.Exceptions.CustomException;
+import Exceptions.CustomException;
+import Repository.IRepo;
 
 public class RunCommand extends Command {
     private Controller ctr;
@@ -11,7 +12,12 @@ public class RunCommand extends Command {
     }
 
     @Override
-    public void execute() throws CustomException {
+    public void execute() throws CustomException, InterruptedException {
         ctr.allStep();
+    }
+
+    public void updateLogFilePath(String logFilePath) {
+        IRepo repo = ctr.getRepo();
+        repo.updateLogFilePath(logFilePath);
     }
 }

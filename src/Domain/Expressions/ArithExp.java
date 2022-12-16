@@ -1,8 +1,9 @@
 package Domain.Expressions;
 
-import Domain.Exceptions.CustomException;
-import Domain.Exceptions.DivisionByZeroException;
-import Domain.Exceptions.TypeException;
+import Domain.MyADTs.MyIHeap;
+import Exceptions.CustomException;
+import Exceptions.DivisionByZeroException;
+import Exceptions.TypeException;
 import Domain.MyADTs.MyIDictionary;
 import Domain.Types.IntType;
 import Domain.Values.IntValue;
@@ -25,12 +26,12 @@ public class ArithExp implements Exp {
     }
 
     @Override
-    public Value eval(MyIDictionary<String, Value> tbl) throws CustomException {
+    public Value eval(MyIDictionary<String, Value> tbl, MyIHeap<Integer, Value> hp) throws CustomException {
         Value v1, v2;
-        v1 = e1.eval(tbl);
+        v1 = e1.eval(tbl, hp);
         if (!v1.getType().equals(new IntType())) throw new TypeException("first operand is not an integer.\n");
 
-        v2 = e2.eval(tbl);
+        v2 = e2.eval(tbl, hp);
         if (!v2.getType().equals(new IntType())) throw new TypeException("second operand is not an integer.\n");
 
         IntValue i1 = (IntValue)v1;

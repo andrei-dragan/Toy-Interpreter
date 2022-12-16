@@ -1,8 +1,7 @@
 package Domain.Expressions;
 
-import Domain.Exceptions.CustomException;
-import Domain.Exceptions.EvalVarException;
-import Domain.Exceptions.KeyNotInDictException;
+import Domain.MyADTs.MyIHeap;
+import Exceptions.CustomException;
 import Domain.MyADTs.MyIDictionary;
 import Domain.Values.Value;
 
@@ -19,7 +18,7 @@ public class VarExp implements Exp {
     }
 
     @Override
-    public Value eval(MyIDictionary<String, Value> tbl) throws CustomException {
+    public Value eval(MyIDictionary<String, Value> tbl, MyIHeap<Integer, Value> hp) throws CustomException {
         return tbl.lookup(id);
     }
 

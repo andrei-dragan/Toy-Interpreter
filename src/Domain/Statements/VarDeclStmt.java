@@ -1,7 +1,7 @@
 package Domain.Statements;
 
-import Domain.Exceptions.CustomException;
-import Domain.Exceptions.KeyInDictException;
+import Exceptions.CustomException;
+import Exceptions.KeyInDictException;
 import Domain.MyADTs.MyIDictionary;
 import Domain.PrgState;
 import Domain.Types.Type;
@@ -25,8 +25,8 @@ public class VarDeclStmt implements IStmt {
     public PrgState execute(PrgState state) throws CustomException {
         MyIDictionary<String, Value> symTbl = state.getSymTable();
         if (symTbl.isDefined(name)) throw new KeyInDictException("variable already declared.\n");
-        symTbl.add(name, typ.getDefault());
-        return state;
+        symTbl.add(name, typ.defaultValue());
+        return null;
     }
 
     @Override

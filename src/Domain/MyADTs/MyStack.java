@@ -1,7 +1,7 @@
 package Domain.MyADTs;
 
-import Domain.Exceptions.EmptyStackException;
-import Domain.Exceptions.StackOverflowException;
+import Exceptions.EmptyStackException;
+import Exceptions.StackOverflowException;
 
 import java.util.Stack;
 
@@ -28,7 +28,7 @@ public class MyStack<T> implements MyIStack<T> {
     }
 
     @Override
-    public Boolean isEmpty() {
+    public boolean isEmpty() {
         return stack.isEmpty();
     }
 

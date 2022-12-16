@@ -1,6 +1,7 @@
 package Domain.Statements;
 
-import Domain.Exceptions.CustomException;
+import Domain.MyADTs.MyIHeap;
+import Exceptions.CustomException;
 import Domain.Expressions.Exp;
 import Domain.MyADTs.MyIDictionary;
 import Domain.MyADTs.MyIList;
@@ -23,11 +24,12 @@ public class PrintStmt implements IStmt {
     public PrgState execute(PrgState state) throws CustomException {
         MyIList<Value> out = state.getOut();
         MyIDictionary<String, Value> symTbl = state.getSymTable();
+        MyIHeap<Integer, Value> heap = state.getHeap();
 
-        Value v = exp.eval(symTbl);
+        Value v = exp.eval(symTbl, heap);
         out.pushBack(v);
 
-        return state;
+        return null;
     }
 
     @Override

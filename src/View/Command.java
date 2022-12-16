@@ -1,6 +1,6 @@
 package View;
 
-import Domain.Exceptions.CustomException;
+import Exceptions.CustomException;
 
 public abstract class Command {
     private final String key;
@@ -10,7 +10,7 @@ public abstract class Command {
         this.description = description;
     }
 
-    public abstract void execute() throws CustomException;
+    public abstract void execute() throws CustomException, InterruptedException;
     public String getKey() {return key;}
     public String getDescription() {return description;}
 }
