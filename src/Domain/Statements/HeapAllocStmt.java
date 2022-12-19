@@ -7,6 +7,7 @@ import Domain.PrgState;
 import Domain.Types.BoolType;
 import Domain.Types.RefType;
 import Domain.Types.StringType;
+import Domain.Types.Type;
 import Domain.Values.RefValue;
 import Domain.Values.Value;
 import Exceptions.AssignmentException;
@@ -42,7 +43,7 @@ public class HeapAllocStmt implements IStmt {
                     int addr = heap.add(val);
                     symTbl.update(id, new RefValue(addr, val.getType()));
                 }
-                else throw new AssignmentException("declared type of variable " + id + " and type of the assigned expression do not match.");
+                else throw new AssignmentException("declared type of variable " + id + " and type of the assigned expression do not match.\n");
             }
             else throw new TypeException(id + " is not a variable of RefType");
         }
@@ -50,6 +51,16 @@ public class HeapAllocStmt implements IStmt {
             throw new KeyNotInDictException("the used variable " + id + " was not declared before");
         }
         return null;
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws CustomException {
+        Type typeVar = typeEnv.lookup(id);
+        Type typeExp = exp.typecheck(typeEnv);
+        if (typeVar.equals(new RefType(typeExp))) return typeEnv;
+        else {
+            throw new AssignmentException("declared type of variable " + id + " and type of the assigned expression do not match.\n");
+        }
     }
 
     @Override

@@ -1,6 +1,8 @@
 package Domain.Expressions;
 
 import Domain.MyADTs.MyIHeap;
+import Domain.Types.BoolType;
+import Domain.Types.Type;
 import Domain.Values.BoolValue;
 import Exceptions.CustomException;
 import Exceptions.TypeException;
@@ -47,6 +49,24 @@ public class RelExp implements Exp {
         else if (Objects.equals(op, "!=")) return new BoolValue(n1 != n2);
         else if (Objects.equals(op, ">")) return new BoolValue(n1 > n2);
         else return new BoolValue(n1 >= n2);
+    }
+
+    @Override
+    public Type typecheck(MyIDictionary<String, Type> typeEnv) throws CustomException {
+        Type typ1, typ2;
+        typ1 = e1.typecheck(typeEnv);
+        typ2 = e2.typecheck(typeEnv);
+        if (typ1.equals(new IntType())) {
+            if (typ2.equals(new IntType())) {
+                return new BoolType();
+            }
+            else {
+                throw new TypeException("second operand is not an integer.\n");
+            }
+        }
+        else {
+            throw new TypeException("first operand is not an integer.\n");
+        }
     }
 
     @Override

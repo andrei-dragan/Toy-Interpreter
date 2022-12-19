@@ -1,5 +1,7 @@
 package Domain.Statements;
 
+import Domain.MyADTs.MyIDictionary;
+import Domain.Types.Type;
 import Exceptions.CustomException;
 import Domain.MyADTs.MyIStack;
 import Domain.PrgState;
@@ -25,6 +27,12 @@ public class CompStmt implements IStmt {
         stk.push(first);
         return null;
     }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws CustomException {
+        return snd.typecheck(first.typecheck(typeEnv));
+    }
+
 
     @Override
     public IStmt deepCopy() {

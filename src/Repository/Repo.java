@@ -42,7 +42,7 @@ public class Repo implements IRepo {
         }
     }
 
-    public void logGenericPrgState() throws  CustomException {
+    public void logGenericPrgState() throws CustomException {
         if (prgStates.size() > 0) {
             try (PrintWriter logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)))) {
                 logFile.print(prgStates.get(0).genericStateToString());

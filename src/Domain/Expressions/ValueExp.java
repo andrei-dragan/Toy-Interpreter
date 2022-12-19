@@ -1,6 +1,7 @@
 package Domain.Expressions;
 
 import Domain.MyADTs.MyIHeap;
+import Domain.Types.Type;
 import Exceptions.CustomException;
 import Domain.MyADTs.MyIDictionary;
 import Domain.Values.Value;
@@ -20,6 +21,11 @@ public class ValueExp implements Exp {
     @Override
     public Value eval(MyIDictionary<String, Value> tbl, MyIHeap<Integer, Value> hp) throws CustomException {
         return e;
+    }
+
+    @Override
+    public Type typecheck(MyIDictionary<String, Type> typeEnv) throws CustomException {
+        return e.getType();
     }
 
     @Override

@@ -5,13 +5,12 @@ import Domain.MyADTs.MyIDictionary;
 import Domain.MyADTs.MyIHeap;
 import Domain.MyADTs.MyITable;
 import Domain.PrgState;
+import Domain.Types.RefType;
 import Domain.Types.StringType;
+import Domain.Types.Type;
 import Domain.Values.StringValue;
 import Domain.Values.Value;
-import Exceptions.CustomException;
-import Exceptions.CustomIOException;
-import Exceptions.FileNameException;
-import Exceptions.KeyInTableException;
+import Exceptions.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -49,6 +48,15 @@ public class OpenRFile implements IStmt {
         }
 
         return null;
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws CustomException {
+        Type typeExp = exp.typecheck(typeEnv);
+        if (typeExp.equals(new StringType())) return typeEnv;
+        else {
+            throw new FileNameException("invalid type for the name of the file.\n");
+        }
     }
 
     @Override

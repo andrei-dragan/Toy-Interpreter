@@ -7,6 +7,7 @@ import Domain.PrgState;
 import Domain.Types.BoolType;
 import Domain.Types.RefType;
 import Domain.Types.StringType;
+import Domain.Types.Type;
 import Domain.Values.RefValue;
 import Domain.Values.Value;
 import Exceptions.*;
@@ -41,7 +42,7 @@ public class HeapWriteStmt implements IStmt {
                     if (((RefType) ref.getType()).getInner().equals(val.getType())) {
                         heap.update(addr, val);
                     }
-                    else throw new AssignmentException("declared type of variable " + id + " and type of the assigned expression do not match.");
+                    else throw new AssignmentException("declared type of variable " + id + " and type of the assigned expression do not match.\n");
                 }
                 else throw new AddressNotInHeapException("address of " + id + " could not be found in heap");
             }
@@ -51,6 +52,16 @@ public class HeapWriteStmt implements IStmt {
             throw new KeyNotInDictException("the used variable " + id + " was not declared before");
         }
         return null;
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws CustomException {
+        Type typeVar = typeEnv.lookup(id);
+        Type typeExp = exp.typecheck(typeEnv);
+        if (typeVar.equals(new RefType(typeExp))) return typeEnv;
+        else {
+            throw new AssignmentException("declared type of variable " + id + " and type of the assigned expression do not match.\n");
+        }
     }
 
     @Override

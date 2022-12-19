@@ -7,6 +7,7 @@ import Domain.MyADTs.MyITable;
 import Domain.PrgState;
 import Domain.Types.IntType;
 import Domain.Types.StringType;
+import Domain.Types.Type;
 import Domain.Values.IntValue;
 import Domain.Values.StringValue;
 import Domain.Values.Value;
@@ -54,6 +55,19 @@ public class ReadFile implements IStmt {
         };
 
         return null;
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws CustomException {
+        Type typeExp = exp.typecheck(typeEnv);
+        Type typeVarName = typeEnv.lookup(varName);
+        if (typeExp.equals(new StringType())) {
+            if (typeVarName.equals(new IntType())) return typeEnv;
+            else throw new TypeException("variable is not an integer.\n");
+        }
+        else {
+            throw new FileNameException("invalid type for the name of the file.\n");
+        }
     }
 
     @Override

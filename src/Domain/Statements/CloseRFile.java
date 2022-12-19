@@ -6,6 +6,7 @@ import Domain.MyADTs.MyIHeap;
 import Domain.MyADTs.MyITable;
 import Domain.PrgState;
 import Domain.Types.StringType;
+import Domain.Types.Type;
 import Domain.Values.StringValue;
 import Domain.Values.Value;
 import Exceptions.CustomException;
@@ -52,6 +53,15 @@ public class CloseRFile implements IStmt {
         fileTbl.delete(fileName);
 
         return null;
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws CustomException {
+        Type typeExp = exp.typecheck(typeEnv);
+        if (typeExp.equals(new StringType())) return typeEnv;
+        else {
+            throw new FileNameException("invalid type for the name of the file.\n");
+        }
     }
 
     @Override

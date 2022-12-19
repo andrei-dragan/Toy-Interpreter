@@ -1,6 +1,7 @@
 package Domain.Statements;
 
 import Domain.MyADTs.*;
+import Domain.Types.Type;
 import Domain.Values.StringValue;
 import Exceptions.CustomException;
 import Exceptions.TypeException;
@@ -44,6 +45,17 @@ public class ForkStmt implements IStmt {
         }
 
         return new PrgState(newStk, newSymTbl, out, fileTable, heap, stmt);
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws CustomException {
+        MyIDictionary<String, Type> newTypeEnv = new MyDictionary<>();
+        Set<Map.Entry<String, Type>> entrySet = typeEnv.getEntrySet();
+        for (Map.Entry<String, Type> t1T2Entry : entrySet) {
+            newTypeEnv.add(t1T2Entry.getKey(), t1T2Entry.getValue().deepCopy());
+        }
+        stmt.typecheck(newTypeEnv);
+        return typeEnv;
     }
 
     @Override

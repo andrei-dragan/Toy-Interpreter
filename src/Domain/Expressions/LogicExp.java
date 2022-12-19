@@ -1,6 +1,8 @@
 package Domain.Expressions;
 
 import Domain.MyADTs.MyIHeap;
+import Domain.Types.IntType;
+import Domain.Types.Type;
 import Exceptions.CustomException;
 import Exceptions.TypeException;
 import Domain.MyADTs.MyIDictionary;
@@ -41,6 +43,24 @@ public class LogicExp implements Exp {
 
         if (Objects.equals(op, "and")) return new BoolValue(n1 && n2);
         else return new BoolValue(n1 || n2);
+    }
+
+    @Override
+    public Type typecheck(MyIDictionary<String, Type> typeEnv) throws CustomException {
+        Type typ1, typ2;
+        typ1 = e1.typecheck(typeEnv);
+        typ2 = e2.typecheck(typeEnv);
+        if (typ1.equals(new BoolType())) {
+            if (typ2.equals(new BoolType())) {
+                return new BoolType();
+            }
+            else {
+                throw new TypeException("second operand is not a boolean.\n");
+            }
+        }
+        else {
+            throw new TypeException("first operand is not a boolean.\n");
+        }
     }
 
     @Override

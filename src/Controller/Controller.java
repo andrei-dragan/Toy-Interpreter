@@ -19,6 +19,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
+import static java.lang.System.exit;
+
 public class Controller {
     IRepo repo;
     ExecutorService executor;
@@ -46,7 +48,7 @@ public class Controller {
                 .collect(Collectors.toList());
     }
 
-    public void oneStepForAllPrg (List<PrgState> prgList) throws InterruptedException, CustomException {
+    public void oneStepForAllPrg (List<PrgState> prgList) throws CustomException, InterruptedException {
         // print the PrgState List into the log file
         prgList.forEach(prg -> {
             try {
@@ -67,7 +69,8 @@ public class Controller {
                     try {
                         return future.get();
                     } catch (InterruptedException | ExecutionException e) {
-                        throw new RuntimeException(e);
+                        System.out.print(e.getMessage());
+                        return null;
                     }
                 })
                 .filter(Objects::nonNull).toList();

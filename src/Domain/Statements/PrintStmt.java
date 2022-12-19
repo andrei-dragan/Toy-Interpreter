@@ -1,6 +1,7 @@
 package Domain.Statements;
 
 import Domain.MyADTs.MyIHeap;
+import Domain.Types.Type;
 import Exceptions.CustomException;
 import Domain.Expressions.Exp;
 import Domain.MyADTs.MyIDictionary;
@@ -30,6 +31,12 @@ public class PrintStmt implements IStmt {
         out.pushBack(v);
 
         return null;
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws CustomException {
+        exp.typecheck(typeEnv);
+        return typeEnv;
     }
 
     @Override

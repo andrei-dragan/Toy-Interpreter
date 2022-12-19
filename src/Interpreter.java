@@ -3,10 +3,7 @@ import Domain.Expressions.*;
 import Domain.MyADTs.*;
 import Domain.PrgState;
 import Domain.Statements.*;
-import Domain.Types.BoolType;
-import Domain.Types.IntType;
-import Domain.Types.RefType;
-import Domain.Types.StringType;
+import Domain.Types.*;
 import Domain.Values.BoolValue;
 import Domain.Values.IntValue;
 import Domain.Values.StringValue;
@@ -260,6 +257,11 @@ class Interpreter {
             outs.add(new MyList<>());
             fileTables.add(new MyTable<>());
             heaps.add(new MyHeap<>());
+
+            MyIDictionary<String, Type> typeEnv = new MyDictionary<>();
+            // type-checker in action
+            stmts.get(i).typecheck(typeEnv);
+
             prgStates.add(new PrgState(stacks.get(i), symTbls.get(i), outs.get(i), fileTables.get(i), heaps.get(i), stmts.get(i)));
             repos.add(new Repo(prgStates.get(i), "log" + Integer.toString(i + 1) + ".txt"));
             controllers.add(new Controller(repos.get(i)));

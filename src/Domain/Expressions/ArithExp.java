@@ -1,7 +1,9 @@
 package Domain.Expressions;
 
 import Domain.MyADTs.MyIHeap;
+import Domain.Types.Type;
 import Exceptions.CustomException;
+import Exceptions.CustomIOException;
 import Exceptions.DivisionByZeroException;
 import Exceptions.TypeException;
 import Domain.MyADTs.MyIDictionary;
@@ -45,6 +47,24 @@ public class ArithExp implements Exp {
         else {
             if (n2 == 0) throw new DivisionByZeroException("division by zero.\n");
             return new IntValue(n1 / n2);
+        }
+    }
+
+    @Override
+    public Type typecheck(MyIDictionary<String, Type> typeEnv) throws CustomException {
+        Type typ1, typ2;
+        typ1 = e1.typecheck(typeEnv);
+        typ2 = e2.typecheck(typeEnv);
+        if (typ1.equals(new IntType())) {
+            if (typ2.equals(new IntType())) {
+                return new IntType();
+            }
+            else {
+                throw new TypeException("second operand is not an integer.\n");
+            }
+        }
+        else {
+            throw new TypeException("first operand is not an integer.\n");
         }
     }
 

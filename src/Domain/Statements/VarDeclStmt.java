@@ -1,5 +1,6 @@
 package Domain.Statements;
 
+import Exceptions.AssignmentException;
 import Exceptions.CustomException;
 import Exceptions.KeyInDictException;
 import Domain.MyADTs.MyIDictionary;
@@ -27,6 +28,12 @@ public class VarDeclStmt implements IStmt {
         if (symTbl.isDefined(name)) throw new KeyInDictException("variable already declared.\n");
         symTbl.add(name, typ.defaultValue());
         return null;
+    }
+
+    @Override
+    public MyIDictionary<String, Type> typecheck(MyIDictionary<String, Type> typeEnv) throws CustomException {
+        typeEnv.add(name, typ);
+        return typeEnv;
     }
 
     @Override
