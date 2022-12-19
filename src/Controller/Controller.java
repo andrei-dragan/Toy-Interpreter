@@ -54,7 +54,7 @@ public class Controller {
             try {
                 repo.logPrgStateExec(prg);
             } catch (CustomException e) {
-                throw new RuntimeException(e);
+                System.out.print(e.getMessage());
             }
         });
         repo.logGenericPrgState();
@@ -83,7 +83,7 @@ public class Controller {
             try {
                 repo.logPrgStateExec(prg);
             } catch (CustomException e) {
-                throw new RuntimeException(e);
+                System.out.print(e.getMessage());
             }
         });
         repo.logGenericPrgState();
